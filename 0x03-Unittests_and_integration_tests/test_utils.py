@@ -52,4 +52,5 @@ class TestMemoize(unittest.TestCase):
 
     @memoize
     def a_property(self):
+        """ __summery__ """
         return self.a_method()
