@@ -43,7 +43,9 @@ class TestGithubOrgClient(unittest.TestCase):
         mocker.return_value = MagicMock(return_value=exp)
         github_client = GithubOrgClient(org)
         self.assertEqual(github_client.org(), exp)
-        mocker.assert_called_once_with("https://api.github.com/orgs/{}".format(org))
+        mocker.assert_called_once_with(
+                f"https://api.github.com/orgs/{org}"
+                )
 
     def test_public_repos_url(self) -> None:
         """_summary_"""
