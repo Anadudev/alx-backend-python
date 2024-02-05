@@ -70,21 +70,21 @@ class TestMemoize(unittest.TestCase):
                 """
                 return 42
 
-        @memoize
-        def a_property(self):
-            """_summary_
+            @memoize
+            def a_property(self):
+                """_summary_
 
-            Returns:
-                _type_: _description_
-            """
-            return self.a_method()
+                Returns:
+                    _type_: _description_
+                """
+                return self.a_method()
 
-    with patch.object(
-        TestClass,
-        "a_method",
-        return_value=lambda: 42,
-        ) as pp:
-        test_class = TestClass()
-        self.assertEqual(test_class.a_property(), 42)
-        self.assertEqual(test_class.a_property(), 42)
-        pp.assert_called_once()
+        with patch.object(
+            TestClass,
+            "a_method",
+            return_value=lambda: 42,
+            ) as pp:
+            test_class = TestClass()
+            self.assertEqual(test_class.a_property(), 42)
+            self.assertEqual(test_class.a_property(), 42)
+            pp.assert_called_once()
