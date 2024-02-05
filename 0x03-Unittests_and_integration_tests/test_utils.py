@@ -52,15 +52,39 @@ class TestGetJson(unittest.TestCase):
 class TestMemoize(unittest.TestCase):
     """testing the memoize method"""
 
-    class TestClass:
-        def a_method(self):
-            return 42
-
-    @memoize
-    def a_property(self):
+    def test_memoize(self):
         """_summary_
 
         Returns:
             _type_: _description_
         """
-        return self.a_method()
+
+        class TestClass:
+            """_summary_"""
+
+            def a_method(self):
+                """_summary_
+
+                Returns:
+                    _type_: _description_
+                """
+                return 42
+
+        @memoize
+        def a_property(self):
+            """_summary_
+
+            Returns:
+                _type_: _description_
+            """
+            return self.a_method()
+
+        with patch.object(
+            TestClass,
+            "a_method",
+            return_value=lambda: 42,
+            ) as pp:
+            test_class = TestClass()
+            self.assertEqual(test_class.a_property(), 42)
+            self.assertEqual(test_class.a_property(), 42)
+            pp.assert_called_once()
